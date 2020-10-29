@@ -1017,7 +1017,8 @@ void ofxOpenVR::renderStereoTargets()
 void ofxOpenVR::drawControllers()
 {
 	// Don't draw controllers if somebody else has input focus
-	if (_pHMD->IsInputFocusCapturedByAnotherProcess()) {
+	if (!_pHMD->IsInputAvailable()) {
+		ofLogError() << "phmd input is not available on draw controllers";
 		return;
 	}
 		
@@ -1073,7 +1074,8 @@ void ofxOpenVR::renderScene(vr::Hmd_Eye nEye)
 	
 
 	// Don't continue if somebody else has input focus
-	if (_pHMD->IsInputFocusCapturedByAnotherProcess()) {
+	if (!_pHMD->IsInputAvailable()) {
+		ofLogError() << "phmd input is not available on render scenes";
 		return;
 	}
 
@@ -1099,7 +1101,7 @@ void ofxOpenVR::renderScene(vr::Hmd_Eye nEye)
 				continue;
 			}
 				
-			if (_pHMD->IsInputFocusCapturedByAnotherProcess() && _pHMD->GetTrackedDeviceClass(unTrackedDevice) == vr::TrackedDeviceClass_Controller) {
+			if (!_pHMD->IsInputAvailable() && _pHMD->GetTrackedDeviceClass(unTrackedDevice) == vr::TrackedDeviceClass_Controller) {
 				continue;
 			}
 				
