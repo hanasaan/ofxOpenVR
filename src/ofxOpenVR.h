@@ -84,6 +84,13 @@ public:
 	ofEvent<ofxOpenVRControllerEventArgs> ofxOpenVRControllerEvent;
 	glm::mat4x4 getmat4HMDPose();
 
+	uint32_t getRenderWidth() const {
+		return _nRenderWidth;
+	}
+	uint32_t getRenderHeight() const {
+		return _nRenderHeight;
+	}
+
 private:
 
 	struct VertexDataScene
